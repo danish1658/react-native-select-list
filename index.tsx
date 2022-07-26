@@ -23,6 +23,11 @@ interface SelectListProps {
   placeholder?: string;
 
   /**
+   * Placeholder text that will be displayed in the search textinput
+   */
+  placeholderSearch?: string;
+
+  /**
    * Additional styles for select box
    */
   boxStyles?: ViewStyle;
@@ -86,6 +91,7 @@ interface SelectListProps {
 const SelectList: React.FC<SelectListProps> = ({
   setSelected,
   placeholder,
+  placeholderSearch,
   boxStyles,
   inputStyles,
   textStyles,
@@ -154,7 +160,7 @@ const SelectList: React.FC<SelectListProps> = ({
             )}
 
             <TextInput
-              placeholder="search"
+              placeholder={placeholderSearch || "Search"}
               onChangeText={(val) => {
                 let result = data.filter((item) => {
                   val.toLowerCase();

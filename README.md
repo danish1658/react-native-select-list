@@ -73,6 +73,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | ------------------ | ---------------------- | ---------------------------------------------------------------------------------- |
 | onSelect           | Function               | Pass any function that you want to trigger immediately after a value is selected   |
 | placeholder        | String                 | Placeholder text that will be displayed in the select box                          |
+| placeholderSearch  | String                 | Placeholder text that will be displayed in the search textinput                    |
 | search             | boolean                | set to false if you dont want to use search functionality                          |
 | boxStyles          | Object                 | Additional styles for select box                                                   |
 | inputStyles        | Object                 | Additional styles for textinput of select box                                      |
