@@ -63,6 +63,11 @@ interface SelectListProps {
   maxHeight?: number;
 
   /**
+   * Number of lines text
+   */
+  numberOfLines?: number;
+
+  /**
    * Data which will be iterated as options of select list
    */
   data: Array<{}>;
@@ -99,6 +104,7 @@ const SelectList: React.FC<SelectListProps> = ({
   dropdownItemStyles,
   dropdownTextStyles,
   maxHeight,
+  numberOfLines,
   data,
   searchicon = false,
   arrowicon = false,
@@ -184,7 +190,7 @@ const SelectList: React.FC<SelectListProps> = ({
             }
           }}
         >
-          <Text style={textStyles}>
+          <Text numberOfLines={numberOfLines || 1} style={textStyles}>
             {selectedval == ""
               ? placeholder
                 ? placeholder

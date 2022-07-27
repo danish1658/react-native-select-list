@@ -82,6 +82,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | dropdownItemStyles | Object                 | Additional styles for dropdown list item                                           |
 | dropdownTextStyles | Object                 | Additional styles for list items text                                              |
 | maxHeight          | Number                 | Maximum height of the dropdown wrapper to occupy                                   |
+| numberOfLines      | Number                 | Number of lines text                                                               |
 | data               | array or array[object] | Data which will be iterated as options of select list                              |
 | setSelected        | Function               | For Setting the option value which will be stored in your local state              |
 | searchicon         | JSX Element            | Pass any JSX to this prop like Text, Image or Icon to show instead of search icon  |
