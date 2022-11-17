@@ -31,6 +31,7 @@ const SelectList: React.FC<SelectListProps> =  ({
         search = true,
         searchPlaceholder = "search",
         notFoundText = "No data found",
+        allowNewEntries = false,
         disabledItemStyles,
         disabledTextStyles,
         onSelect = () => {},
@@ -45,7 +46,8 @@ const SelectList: React.FC<SelectListProps> =  ({
     const [selectedval, setSelectedVal] = React.useState<any>("");
     const [height,setHeight] = React.useState<number>(200)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
-    const [filtereddata,setFilteredData] = React.useState(data)
+    const [filtereddata,setFilteredData] = React.useState(data);
+    const [enteredVal, setEnteredVal] = React.useState<any>("");
 
 
     const slidedown = () => {
@@ -143,6 +145,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                         let row = item.value.toLowerCase()
                                         return row.search(val.toLowerCase()) > -1;
                                     });
+                                    setEnteredVal(val);
                                     setFilteredData(result)
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
@@ -222,15 +225,29 @@ const SelectList: React.FC<SelectListProps> =  ({
                                             </TouchableOpacity>
                                         )
                                     }
-                                    
                                 })
                                 :
-                                <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                (allowNewEntries)
+                                ?
+                                <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
+                                        setSelected(enteredVal)
+                                    let key = data.length+1
+                                    data.push({key:key,value:enteredVal})
+                                    setSelected(key);
+                                    setSelectedVal(enteredVal);
+                                    slideup()
+                                    setTimeout(() => setFilteredData(data), 800)
+
+                                }}>
+                                    <Text style={[{ fontFamily }, dropdownTextStyles]}>{enteredVal}</Text>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
                                     setSelected(undefined)
                                     setSelectedVal("")
                                     slideup()
                                     setTimeout(() => setFilteredData(data), 800)
-                                    
+
                                 }}>
                                     <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                 </TouchableOpacity>
