@@ -46,7 +46,8 @@ const SelectList: React.FC<SelectListProps> =  ({
     const [selectedval, setSelectedVal] = React.useState<any>("");
     const [height,setHeight] = React.useState<number>(200)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
-    const [filtereddata,setFilteredData] = React.useState(data)
+    const [filtereddata,setFilteredData] = React.useState(data);
+    const [enteredVal, setEnteredVal] = React.useState<any>("");
 
 
     const slidedown = () => {
