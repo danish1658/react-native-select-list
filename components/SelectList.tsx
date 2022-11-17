@@ -221,10 +221,9 @@ const SelectList: React.FC<SelectListProps> =  ({
                                                 
                                             }}>
                                                 <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
-                                                </TouchableOpacity>
+                                            </TouchableOpacity>
                                             )
                                         }
-
                                     })
                                     :
                                     (allowNewEntries)
