@@ -31,6 +31,7 @@ const SelectList: React.FC<SelectListProps> =  ({
         search = true,
         searchPlaceholder = "search",
         notFoundText = "No data found",
+        allowNewEntries = false,
         disabledItemStyles,
         disabledTextStyles,
         onSelect = () => {},
@@ -143,6 +144,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                         let row = item.value.toLowerCase()
                                         return row.search(val.toLowerCase()) > -1;
                                     });
+                                    setEnteredVal(val);
                                     setFilteredData(result)
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
@@ -219,19 +221,34 @@ const SelectList: React.FC<SelectListProps> =  ({
                                                 
                                             }}>
                                                 <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
-                                            </TouchableOpacity>
-                                        )
-                                    }
-                                    
-                                })
-                                :
-                                <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
-                                    setSelected(undefined)
-                                    setSelectedVal("")
-                                    slideup()
-                                    setTimeout(() => setFilteredData(data), 800)
-                                    
-                                }}>
+                                                </TouchableOpacity>
+                                            )
+                                        }
+
+                                    })
+                                    :
+                                    (allowNewEntries)
+                                        ?
+                                        <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
+                                             setSelected(enteredVal)
+                                            let key = data.length+1
+                                            data.push({key:key,value:enteredVal})
+                                            setSelected(key);
+                                            setSelectedVal(enteredVal);
+                                            slideup()
+                                            setTimeout(() => setFilteredData(data), 800)
+
+                                        }}>
+                                            <Text style={[{ fontFamily }, dropdownTextStyles]}>{enteredVal}</Text>
+                                        </TouchableOpacity>
+                                        :
+                                        <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
+                                            setSelected(undefined)
+                                            setSelectedVal("")
+                                            slideup()
+                                            setTimeout(() => setFilteredData(data), 800)
+
+                                        }}>
                                     <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
                                 </TouchableOpacity>
                             }
