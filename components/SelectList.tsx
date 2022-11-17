@@ -223,34 +223,34 @@ const SelectList: React.FC<SelectListProps> =  ({
                                             }}>
                                                 <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
                                             </TouchableOpacity>
-                                            )
-                                        }
-                                    })
-                                    :
-                                    (allowNewEntries)
-                                    ?
-                                    <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
-                                            setSelected(enteredVal)
-                                        let key = data.length+1
-                                        data.push({key:key,value:enteredVal})
-                                        setSelected(key);
-                                        setSelectedVal(enteredVal);
-                                        slideup()
-                                        setTimeout(() => setFilteredData(data), 800)
+                                        )
+                                    }
+                                })
+                                :
+                                (allowNewEntries)
+                                ?
+                                <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
+                                        setSelected(enteredVal)
+                                    let key = data.length+1
+                                    data.push({key:key,value:enteredVal})
+                                    setSelected(key);
+                                    setSelectedVal(enteredVal);
+                                    slideup()
+                                    setTimeout(() => setFilteredData(data), 800)
 
-                                    }}>
-                                        <Text style={[{ fontFamily }, dropdownTextStyles]}>{enteredVal}</Text>
-                                    </TouchableOpacity>
-                                    :
-                                    <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
-                                        setSelected(undefined)
-                                        setSelectedVal("")
-                                        slideup()
-                                        setTimeout(() => setFilteredData(data), 800)
+                                }}>
+                                    <Text style={[{ fontFamily }, dropdownTextStyles]}>{enteredVal}</Text>
+                                </TouchableOpacity>
+                                :
+                                <TouchableOpacity style={[styles.option, dropdownItemStyles]} onPress={() => {
+                                    setSelected(undefined)
+                                    setSelectedVal("")
+                                    slideup()
+                                    setTimeout(() => setFilteredData(data), 800)
 
-                                    }}>
-                                        <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
-                                    </TouchableOpacity>
+                                }}>
+                                    <Text style={[{fontFamily},dropdownTextStyles]}>{notFoundText}</Text>
+                                </TouchableOpacity>
                             }
                             
                             
