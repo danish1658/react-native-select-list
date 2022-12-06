@@ -167,7 +167,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                 (selectedval?.length > 0 )
 
                 ?
-                        <TouchableOpacity disabled={!enabled} style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }} >
+                    <TouchableOpacity disabled={!enabled} style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }} >
                         <View>
                             <Text style={[{fontWeight:'600',fontFamily},labelStyles]}>{ label }</Text>
                             <View style={{flexDirection:'row',marginBottom:8,flexWrap:'wrap'}}>
