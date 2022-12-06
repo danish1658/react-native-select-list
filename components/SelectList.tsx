@@ -36,7 +36,8 @@ const SelectList: React.FC<SelectListProps> =  ({
         onSelect = () => {},
         save = 'key',
         dropdownShown = false,
-        fontFamily
+        fontFamily,
+        enabled = true,
     }) => {
 
     const oldOption = React.useRef(null)
@@ -168,7 +169,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                         
                     </View>
                 :
-                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
+                    <TouchableOpacity disabled={!enabled} style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
                         <Text style={[{fontFamily},inputStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
                         {
                             (!arrowicon)

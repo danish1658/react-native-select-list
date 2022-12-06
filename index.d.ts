@@ -112,6 +112,11 @@ export interface SelectListProps  {
     *  Pass any JSX to this prop like Text, Image or Icon to show instead of close icon
     */
     closeicon?: JSX.Element,
+
+    /**
+    *  set dropdown as disabled
+    */
+    enabled?: boolean,
 }
 
 
@@ -257,6 +262,11 @@ export interface MultipleSelectListProps  {
     * Additional styles for label
     */
     labelStyles?: TextStyle,
+
+    /**
+    *  set dropdown as disabled
+    */
+    enabled?: boolean,
 }
 
 declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}
