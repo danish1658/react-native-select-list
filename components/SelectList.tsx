@@ -147,7 +147,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
-                                <TouchableOpacity onPress={() => slideup()} >
+                                <TouchableOpacity accessible={false}  onPress={() => slideup()} >
 
                                 {
                                     (!closeicon)
@@ -168,7 +168,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                         
                     </View>
                 :
-                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
+                    <TouchableOpacity accessible={false} style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
                         <Text style={[{fontFamily},inputStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
                         {
                             (!arrowicon)
@@ -200,13 +200,13 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     let disabled = item.disabled ?? false;
                                     if(disabled){
                                         return(
-                                            <TouchableOpacity style={[styles.disabledoption,disabledItemStyles]} key={index} onPress={ () => {}}>
+                                            <TouchableOpacity accessible={false} style={[styles.disabledoption,disabledItemStyles]} key={index} onPress={ () => {}}>
                                                 <Text style={[{color:'#c4c5c6',fontFamily},disabledTextStyles]}>{value}</Text>
                                             </TouchableOpacity>
                                         )
                                     }else{
                                         return(
-                                            <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
+                                            <TouchableOpacity accessible={false} style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
                                                 if(save === 'value'){
                                                     setSelected(value);
                                                 }else{
@@ -225,7 +225,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     
                                 })
                                 :
-                                <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
+                                <TouchableOpacity accessible={false}  style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                     setSelected(undefined)
                                     setSelectedVal("")
                                     slideup()
