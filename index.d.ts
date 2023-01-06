@@ -14,6 +14,11 @@ export interface SelectListProps  {
     placeholder?: string,
 
     /**
+    * Placeholder text color that will style the placeholder of search text input
+    */
+    placeholderTextColor?: string,
+
+    /**
     * Additional styles for select box
     */
     boxStyles?: ViewStyle,
@@ -126,6 +131,11 @@ export interface MultipleSelectListProps  {
     */
     placeholder?: string,
 
+    /**
+    * Placeholder text color that will style the placeholder of search text input
+    */
+    placeholderTextColor?: string,
+    
     /**
     * Additional styles for select box
     */
