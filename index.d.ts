@@ -117,6 +117,11 @@ export interface SelectListProps  {
 
 export interface MultipleSelectListProps  {
     /**
+     * the initial selected values of the multiple select list
+     */
+    seedSelectedVals?: Array<{}>,
+
+    /**
     * Fn to set Selected option value which will be stored in your local state
     */
     setSelected: Function,
