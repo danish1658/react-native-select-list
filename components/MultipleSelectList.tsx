@@ -9,7 +9,8 @@ import {
     Animated,
     TextInput,
     ViewStyle,
-    Pressable} from 'react-native';
+    Pressable,
+    Keyboard} from 'react-native';
 
 import { MultipleSelectListProps } from '..';
 
@@ -57,6 +58,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
     const slidedown = () => {
         setDropdown(true)
+        Keyboard.dismiss();
         
         Animated.timing(animatedvalue,{
             toValue:height,
@@ -188,7 +190,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                         </View>
                     </TouchableOpacity>
                 :
-                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }}>
+                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }} >
                         <Text style={[{fontFamily},inputStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
                         {
                             (!arrowicon)
