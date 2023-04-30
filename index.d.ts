@@ -257,6 +257,7 @@ export interface MultipleSelectListProps  {
     * Additional styles for label
     */
     labelStyles?: TextStyle,
+    defaultSelected?: any[];
 }
 
 declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}
