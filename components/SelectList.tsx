@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import { SelectListProps } from '..';
+import { AntDesign } from '@expo/vector-icons';
 
 type L1Keys = { key?: any; value?: any; disabled?: boolean | undefined }
 
@@ -75,6 +76,8 @@ const SelectList: React.FC<SelectListProps> =  ({
 
     
     React.useEffect(() => {
+        if(data.length>0)
+            data.unshift({ key: "000", value: "Clear" })
         setFilteredData(data);
       },[data])
 
@@ -148,7 +151,10 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
-                                <TouchableOpacity onPress={() => slideup()} >
+                                <TouchableOpacity onPress={() => {
+                                    setFilteredData(data)
+                                    slideup()
+                                }} >
 
                                 {
                                     (!closeicon)
@@ -208,6 +214,13 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     }else{
                                         return(
                                             <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
+                                                if (key === "000") {
+                                                        setSelected("")
+                                                        setSelectedVal("");
+                                                        slideup()
+                                                        setTimeout(() => { setFilteredData(data) }, 800)
+                                                        return
+                                                    }
                                                 if(save === 'value'){
                                                     setSelected(value);
                                                 }else{
@@ -219,7 +232,23 @@ const SelectList: React.FC<SelectListProps> =  ({
                                                 setTimeout(() => {setFilteredData(data)}, 800)
                                                 
                                             }}>
-                                                <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
+                                                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                                                        <View style={{ flex: 1 }}>
+                                                            <Text style={[{ fontFamily }, dropdownTextStyles]}>
+                                                                {value}
+                                                            </Text>
+                                                        </View>
+                                                        
+                                                        {key === "000" ?
+                                                            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                                                                <AntDesign name="closecircle" size={24} color="red" />
+                                                            </View> : null}
+
+                                                        {value === selectedval && key !== "000" ? (
+                                                            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                                                                <AntDesign name="check" size={24} color="black" />
+                                                            </View>
+                                                        ) : null}
                                             </TouchableOpacity>
                                         )
                                     }
