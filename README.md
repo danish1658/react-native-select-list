@@ -136,6 +136,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | save| string | Pass ('key' or 'value') to save data of your choice in your local state variable
 | onSelect| Function | Pass any function that you want to trigger immediately after a value is selected
 | placeholder | String | Placeholder text that will be displayed in the select box
+| placeholderTextColor | String | Text color for the placeholder
 | search | boolean | set to false if you dont want to use search functionality
 | maxHeight| Number | Maximum height of the dropdown wrapper to occupy
 | data| array or array[object]| Data which will be iterated as options of select list

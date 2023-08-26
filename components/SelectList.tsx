@@ -18,6 +18,7 @@ type L1Keys = { key?: any; value?: any; disabled?: boolean | undefined }
 const SelectList: React.FC<SelectListProps> =  ({
         setSelected,
         placeholder,
+        placeholderTextColor,
         boxStyles,
         inputStyles,
         dropdownStyles,
@@ -138,6 +139,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                             
                             <TextInput 
                                 placeholder={searchPlaceholder}
+                                placeholderTextColor={placeholderTextColor}
                                 onChangeText={(val) => {
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
