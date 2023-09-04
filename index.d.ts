@@ -79,7 +79,7 @@ export interface SelectListProps  {
     onSelect?: () => void,
 
     /**
-    * set fontFamily of whole component Text 
+    * set fontFamily of whole component Text
     */
     fontFamily?: string,
 
@@ -137,7 +137,7 @@ export interface MultipleSelectListProps  {
     inputStyles?: TextStyle,
 
     /**
-    *  	Additional styles for dropdown scrollview 
+    *  	Additional styles for dropdown scrollview
     */
     dropdownStyles?:ViewStyle,
 
@@ -162,9 +162,9 @@ export interface MultipleSelectListProps  {
     data: Array<{}>,
 
     /**
-    * The default option of the select list
-    */
-    defaultOption?: { key: any, value: any },
+     * The default option of the multi select list
+     */
+    defaultOptions?: Array<{}>,
 
     /**
     * Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
@@ -197,7 +197,7 @@ export interface MultipleSelectListProps  {
     label?: string,
 
     /**
-    * set fontFamily of whole component Text 
+    * set fontFamily of whole component Text
     */
     fontFamily?: string,
 
@@ -231,7 +231,7 @@ export interface MultipleSelectListProps  {
     * What to store inside your local state (key or value)
     */
     save?: 'key' | 'value',
-    
+
     /**
     * Control the dropdown with this prop
     */
@@ -242,7 +242,7 @@ export interface MultipleSelectListProps  {
     */
     closeicon?: JSX.Element,
 
-    
+
     /**
     * Additional styles for multiselect badge
     */
