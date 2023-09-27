@@ -139,10 +139,14 @@ const SelectList: React.FC<SelectListProps> =  ({
                             <TextInput 
                                 placeholder={searchPlaceholder}
                                 onChangeText={(val) => {
-                                    let result =  data.filter((item: L1Keys) => {
-                                        val.toLowerCase();
-                                        let row = item.value.toLowerCase()
-                                        return row.search(val.toLowerCase()) > -1;
+                                    val = val.toLowerCase();
+                                    let result = data.filter((item) => {
+                                        // Ensure item is a string and convert it to lowercase
+                                        if (typeof item === 'string') {
+                                            let row = item.toLowerCase();
+                                            return row.startsWith(val);
+                                        }
+                                        return false;
                                     });
                                     setFilteredData(result)
                                 }}
