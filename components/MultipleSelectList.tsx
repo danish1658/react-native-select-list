@@ -34,6 +34,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         search = true,
         searchPlaceholder = "search",
         onSelect = () => {},
+        onOpen = () => {},
+        onClose = () => {},
         label,
         notFoundText = "No data found",
         disabledItemStyles,
@@ -58,22 +60,22 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
     const slidedown = () => {
         setDropdown(true)
-        
         Animated.timing(animatedvalue,{
             toValue:height,
             duration:500,
             useNativeDriver:false,
             
         }).start()
+        onOpen()
     }
     const slideup = () => {
-        
         Animated.timing(animatedvalue,{
             toValue:0,
             duration:500,
             useNativeDriver:false,
             
         }).start(() => setDropdown(false))
+        onClose()
     }
 
     React.useEffect( () => {
