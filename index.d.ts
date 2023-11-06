@@ -79,6 +79,16 @@ export interface SelectListProps  {
     onSelect?: () => void,
 
     /**
+     * Trigger an action when dropdown is opened
+     */
+    onOpen?: () => void,
+
+    /**
+     * Trigger an action when dropdown is closed
+     */
+    onClose?: () => void,
+
+    /**
     * set fontFamily of whole component Text 
     */
     fontFamily?: string,
@@ -190,6 +200,16 @@ export interface MultipleSelectListProps  {
     * Trigger an action when option is selected
     */
     onSelect?: () => void,
+
+    /**
+    * Trigger an action when dropdown is opened
+    */
+    onOpen?: () => void,
+
+    /**
+    * Trigger an action when dropdown is closed
+    */
+    onClose?: () => void,
 
     /**
     * set text of label which appears soon after multiple values are selected
