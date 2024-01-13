@@ -50,6 +50,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
     const oldOption = React.useRef(null)
     const [_firstRender,_setFirstRender] = React.useState<boolean>(true);
+    const [_defaultOptionsDefined,_setDefaultOptionsDefined] = React.useState<boolean>(false);
     const [dropdown, setDropdown] = React.useState<boolean>(dropdownShown);
     const [selectedval, setSelectedVal] = React.useState<any>([]);
     const [height,setHeight] = React.useState<number>(350)
@@ -99,7 +100,8 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     },[selectedval])
 
     React.useEffect(() => {
-        if(defaultOptions && _firstRender){
+        if(defaultOptions && !_defaultOptionsDefined){
+            _setDefaultOptionsDefined(true);
             setSelected(defaultOptions);
             setSelectedVal(defaultOptions);
         }
