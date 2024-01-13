@@ -101,8 +101,16 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
     React.useEffect(() => {
         if(defaultOptions && !_defaultOptionsDefined){
-            _setDefaultOptionsDefined(true);
-            setSelected(defaultOptions);
+        _setDefaultOptionsDefined(true);
+            if (save === 'value') {
+                setSelected(defaultOptions);
+            }
+            else {
+                const retval = data
+                    .filter((item) => defaultOptions.some((option) => option === item.value))
+                    .map((item) => item.key);
+                setSelected(retval);
+            }
             setSelectedVal(defaultOptions);
         }
     })
