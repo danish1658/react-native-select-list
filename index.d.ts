@@ -184,7 +184,7 @@ export interface MultipleSelectListProps  {
     /**
     * set to false if you dont want to use search functionality
     */
-     searchPlaceholder?: string,
+    searchPlaceholder?: string,
 
     /**
     * Trigger an action when option is selected

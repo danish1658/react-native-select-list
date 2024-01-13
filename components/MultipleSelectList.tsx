@@ -55,6 +55,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     const [height,setHeight] = React.useState<number>(350)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data);
+    const [searchValue,setSearchValue] = React.useState("");
 
 
     const slidedown = () => {
@@ -148,7 +149,9 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                         return row.search(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
+                                    setSearchValue(val);
                                 }}
+                                value={searchValue}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
                                 <TouchableOpacity onPress={() => {
