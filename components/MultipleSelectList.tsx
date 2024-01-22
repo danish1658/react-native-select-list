@@ -10,8 +10,7 @@ import {
     TextInput,
     ViewStyle,
     Pressable,
-    Keyboard
-} from 'react-native';
+    Keyboard} from 'react-native';
 
 import { MultipleSelectListProps } from '..';
 
@@ -44,13 +43,14 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         badgeTextStyles,
         checkBoxStyles,
         save = 'key',
-        dropdownShown = false
+        dropdownShown = false,
+        defaultSelected = [], 
     }) => {
 
     const oldOption = React.useRef(null)
     const [_firstRender,_setFirstRender] = React.useState<boolean>(true);
     const [dropdown, setDropdown] = React.useState<boolean>(dropdownShown);
-    const [selectedval, setSelectedVal] = React.useState<any>([]);
+    const [selectedval, setSelectedVal] = React.useState<any>(defaultSelected);
     const [height,setHeight] = React.useState<number>(350)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data);
@@ -58,6 +58,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
     const slidedown = () => {
         setDropdown(true)
+        Keyboard.dismiss();
         
         Animated.timing(animatedvalue,{
             toValue:height,
@@ -107,10 +108,10 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         
     },[dropdownShown])
 
-
-
-
-
+    React.useEffect(() => {
+        setSelected(defaultSelected);
+    }, []);
+         
 
     return(
         <View>
@@ -169,7 +170,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                 (selectedval?.length > 0 )
 
                 ?
-                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ Keyboard.dismiss(); slidedown() }else{ slideup() } }} >
+                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }} >
                         <View>
                             <Text style={[{fontWeight:'600',fontFamily},labelStyles]}>{ label }</Text>
                             <View style={{flexDirection:'row',marginBottom:8,flexWrap:'wrap'}}>
@@ -186,7 +187,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                         </View>
                     </TouchableOpacity>
                 :
-                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ Keyboard.dismiss(); slidedown() }else{ slideup() } }}>
+                    <TouchableOpacity style={[styles.wrapper,boxStyles]} onPress={() => { if(!dropdown){ slidedown() }else{ slideup() } }} >
                         <Text style={[{fontFamily},inputStyles]}>{ (selectedval == "") ? (placeholder) ? placeholder : 'Select option' : selectedval  }</Text>
                         {
                             (!arrowicon)

@@ -43,6 +43,8 @@ export interface SelectListProps  {
     */
     maxHeight?: number,
 
+    defaultSelected:  Array<{}>,
+
     /**
     * Data which will be iterated as options of select list
     */
