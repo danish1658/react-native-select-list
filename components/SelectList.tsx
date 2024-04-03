@@ -142,7 +142,7 @@ const SelectList: React.FC<SelectListProps> =  ({
                                     let result =  data.filter((item: L1Keys) => {
                                         val.toLowerCase();
                                         let row = item.value.toLowerCase()
-                                        return row.search(val.toLowerCase()) > -1;
+                                        return row.startsWith(val.toLowerCase()) > -1;
                                     });
                                     setFilteredData(result)
                                 }}
