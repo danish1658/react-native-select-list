@@ -115,7 +115,9 @@ const SelectList: React.FC<SelectListProps> =  ({
         
     },[dropdownShown])
 
-
+    const removeAccents = (str) => {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      };
 
     return(
         <View>
@@ -140,9 +142,9 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 placeholder={searchPlaceholder}
                                 onChangeText={(val) => {
                                     let result =  data.filter((item: L1Keys) => {
-                                        val.toLowerCase();
-                                        let row = item.value.toLowerCase()
-                                        return row.search(val.toLowerCase()) > -1;
+                                        const normalizedVal = removeAccents(val.toLowerCase());
+                                        const normalizedRow = removeAccents(item.value.toLowerCase());
+                                        return normalizedRow.includes(normalizedVal);
                                     });
                                     setFilteredData(result)
                                 }}
