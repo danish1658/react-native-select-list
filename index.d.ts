@@ -2,11 +2,16 @@
 import type * as React from "react";
 import { ViewStyle, TextStyle } from 'react-native';
 
-export interface SelectListProps  {
+export interface SelectListProps {
     /**
     * Fn to set Selected option value which will be stored in your local state
     */
     setSelected: Function,
+
+    /**
+     * The value of the selected option to be updated in the local state
+    */
+    value: any,
 
     /**
     * Placeholder text that will be displayed in the select box
@@ -122,6 +127,11 @@ export interface MultipleSelectListProps  {
     setSelected: Function,
 
     /**
+     * The value of the selected option to be updated in the local state
+    */
+    value: any[],
+
+    /**
     * Placeholder text that will be displayed in the select box
     */
     placeholder?: string,
@@ -139,7 +149,7 @@ export interface MultipleSelectListProps  {
     /**
     *  	Additional styles for dropdown scrollview 
     */
-    dropdownStyles?:ViewStyle,
+    dropdownStyles?: ViewStyle,
 
     /**
     *  Additional styles for dropdown list item
@@ -184,7 +194,7 @@ export interface MultipleSelectListProps  {
     /**
     * set to false if you dont want to use search functionality
     */
-     searchPlaceholder?: string,
+    searchPlaceholder?: string,
 
     /**
     * Trigger an action when option is selected
@@ -231,7 +241,7 @@ export interface MultipleSelectListProps  {
     * What to store inside your local state (key or value)
     */
     save?: 'key' | 'value',
-    
+
     /**
     * Control the dropdown with this prop
     */
@@ -242,7 +252,7 @@ export interface MultipleSelectListProps  {
     */
     closeicon?: JSX.Element,
 
-    
+
     /**
     * Additional styles for multiselect badge
     */
@@ -259,9 +269,9 @@ export interface MultipleSelectListProps  {
     labelStyles?: TextStyle,
 }
 
-declare class MultipleSelectList extends React.Component<MultipleSelectListProps> {}
+declare class MultipleSelectList extends React.Component<MultipleSelectListProps> { }
 
-declare class SelectList extends React.Component<SelectListProps> {}
+declare class SelectList extends React.Component<SelectListProps> { }
 
 export {
     MultipleSelectList,

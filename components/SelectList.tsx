@@ -15,7 +15,8 @@ import { SelectListProps } from '..';
 
 type L1Keys = { key?: any; value?: any; disabled?: boolean | undefined }
 
-const SelectList: React.FC<SelectListProps> =  ({
+const SelectList: React.FC<SelectListProps> = ({
+        value = "",
         setSelected,
         placeholder,
         boxStyles,
@@ -43,7 +44,7 @@ const SelectList: React.FC<SelectListProps> =  ({
     const oldOption = React.useRef(null)
     const [_firstRender,_setFirstRender] = React.useState<boolean>(true);
     const [dropdown, setDropdown] = React.useState<boolean>(dropdownShown);
-    const [selectedval, setSelectedVal] = React.useState<any>("");
+    const [selectedval, setSelectedVal] = React.useState<any>(value);
     const [height,setHeight] = React.useState<number>(200)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data)
@@ -102,18 +103,24 @@ const SelectList: React.FC<SelectListProps> =  ({
             setSelectedVal(defaultOption.value);
         }
         
-    },[defaultOption])
+    }, [defaultOption])
+
 
     React.useEffect(() => {
-        if(!_firstRender){
-            if(dropdownShown)
+        setSelectedVal(value);
+    }, [value]);
+
+    
+    React.useEffect(() => {
+        if (!_firstRender) {
+            if (dropdownShown)
                 slidedown();
             else
                 slideup();
             
         }
         
-    },[dropdownShown])
+    }, [dropdownShown]);
 
 
 
@@ -197,29 +204,29 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 ?
                                 filtereddata.map((item: L1Keys,index: number) => {
                                     let key = item.key ?? item.value ?? item;
-                                    let value = item.value ?? item;
+                                    let itemValue = item.value ?? item;
                                     let disabled = item.disabled ?? false;
                                     if(disabled){
                                         return(
                                             <TouchableOpacity style={[styles.disabledoption,disabledItemStyles]} key={index} onPress={ () => {}}>
-                                                <Text style={[{color:'#c4c5c6',fontFamily},disabledTextStyles]}>{value}</Text>
+                                                <Text style={[{color:'#c4c5c6',fontFamily},disabledTextStyles]}>{itemValue}</Text>
                                             </TouchableOpacity>
                                         )
                                     }else{
                                         return(
                                             <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
                                                 if(save === 'value'){
-                                                    setSelected(value);
+                                                    setSelected(itemValue);
                                                 }else{
                                                     setSelected(key)
                                                 }
                                                 
-                                                setSelectedVal(value)
+                                                setSelectedVal(itemValue)
                                                 slideup()
                                                 setTimeout(() => {setFilteredData(data)}, 800)
                                                 
                                             }}>
-                                                <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
+                                                <Text style={[{fontFamily},dropdownTextStyles]}>{itemValue}</Text>
                                             </TouchableOpacity>
                                         )
                                     }

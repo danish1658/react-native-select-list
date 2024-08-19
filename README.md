@@ -140,6 +140,7 @@ For Live `Demo` [(Expo Snack)](https://snack.expo.dev/@danish1658/react-native-d
 | maxHeight| Number | Maximum height of the dropdown wrapper to occupy
 | data| array or array[object]| Data which will be iterated as options of select list
 | setSelected| Function | For Setting the option value which will be stored in your local state
+| value | any (or any[]) | For changing the value of select list from outside
 | searchicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of search icon
 | arrowicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of chevron icon
 | closeicon| JSX Element | Pass any JSX to this prop like Text, Image or Icon to show instead of close icon

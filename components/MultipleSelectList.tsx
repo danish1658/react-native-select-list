@@ -18,8 +18,9 @@ import { MultipleSelectListProps } from '..';
 type L1Keys = { key?: any; value?: any; disabled?: boolean | undefined }
 
 const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
-        fontFamily,
+        value=[],
         setSelected,
+        fontFamily,
         placeholder,
         boxStyles,
         inputStyles,
@@ -50,7 +51,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
     const oldOption = React.useRef(null)
     const [_firstRender,_setFirstRender] = React.useState<boolean>(true);
     const [dropdown, setDropdown] = React.useState<boolean>(dropdownShown);
-    const [selectedval, setSelectedVal] = React.useState<any>([]);
+    const [selectedval, setSelectedVal] = React.useState<any>(value);
     const [height,setHeight] = React.useState<number>(350)
     const animatedvalue = React.useRef(new Animated.Value(0)).current;
     const [filtereddata,setFilteredData] = React.useState(data);
@@ -94,7 +95,13 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
         }
         onSelect()
         
-    },[selectedval])
+    }, [selectedval])
+    
+
+    React.useEffect(() => {
+        setSelectedVal(value);
+    }, [value]);
+
 
     React.useEffect(() => {
         if(!_firstRender){
@@ -215,7 +222,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                     ?
                                     filtereddata.map((item: L1Keys,index: number) => {
                                         let key = item.key ?? item.value ?? item;
-                                        let value = item.value ?? item;
+                                        let itemValue = item.value ?? item;
                                         let disabled = item.disabled ?? false;
                                         if(disabled){
                                             return(
@@ -223,7 +230,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                     <View style={[{width:15,height:15,marginRight:10,borderRadius:3,justifyContent:'center',alignItems:'center',backgroundColor:'#c4c5c6'},disabledCheckBoxStyles]}>
                                                         
                                                         {
-                                                            (selectedval?.includes(value))
+                                                            (selectedval?.includes(itemValue))
                                                             ?
                                                                 
                                                                 <Image 
@@ -238,7 +245,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
 
                                                         }
                                                     </View>
-                                                    <Text style={[{fontFamily,color:'#c4c5c6'},disabledTextStyles]}>{value}</Text>
+                                                    <Text style={[{fontFamily,color:'#c4c5c6'},disabledTextStyles]}>{itemValue}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }else{
@@ -246,7 +253,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                 <TouchableOpacity style={[styles.option,dropdownItemStyles]} key={index} onPress={ () => {
 
                                                     
-                                                    let existing = selectedval?.indexOf(value)
+                                                    let existing = selectedval?.indexOf(itemValue)
 
 
                                                     // console.log(existing);
@@ -268,7 +275,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                     }else{
                                                         if(save === 'value'){
                                                             setSelected((val: any) => {
-                                                                let temp = [...new Set([...val,value])];
+                                                                let temp = [...new Set([...val,itemValue])];
                                                                 return temp;
                                                             })
                                                         }else{
@@ -279,7 +286,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         }
                                                        
                                                         setSelectedVal((val: any )=> {
-                                                            let temp = [...new Set([...val,value])];
+                                                            let temp = [...new Set([...val,itemValue])];
                                                             return temp;
                                                         })
                                     
@@ -293,7 +300,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                     <View style={[{width:15,height:15,borderWidth:1,marginRight:10,borderColor:'gray',borderRadius:3,justifyContent:'center',alignItems:'center'},checkBoxStyles]}>
                                                         
                                                         {
-                                                            (selectedval?.includes(value))
+                                                            (selectedval?.includes(itemValue))
                                                             ?
                                                                 
                                                                 <Image 
@@ -312,7 +319,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                                         
                                                         
                                                     </View>
-                                                    <Text style={[{fontFamily},dropdownTextStyles]}>{value}</Text>
+                                                    <Text style={[{fontFamily},dropdownTextStyles]}>{itemValue}</Text>
                                                 </TouchableOpacity>
                                             )
                                         }
@@ -321,7 +328,7 @@ const MultipleSelectList: React.FC<MultipleSelectListProps> = ({
                                     :
                                     <TouchableOpacity style={[styles.option,dropdownItemStyles]} onPress={ () => {
                                         setSelected(undefined)
-                                        setSelectedVal("")
+                                        setSelectedVal([])
                                         slideup()
                                         setTimeout(() => setFilteredData(data), 800)  
                                     }}>
