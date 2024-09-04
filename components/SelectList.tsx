@@ -138,13 +138,13 @@ const SelectList: React.FC<SelectListProps> =  ({
                             
                             <TextInput 
                                 placeholder={searchPlaceholder}
-                                onChangeText={(val) => {
-                                    let result =  data.filter((item: L1Keys) => {
-                                        val.toLowerCase();
-                                        let row = item.value.toLowerCase()
-                                        return row.search(val.toLowerCase()) > -1;
+                                onChangeText={(val: String) => {
+                                    let result = data.filter((item: L1Keys) => {
+                                        let valLower = val.toLowerCase().trim();
+                                        let row = item.value.toLowerCase().trim();
+                                        return row.includes(valLower);
                                     });
-                                    setFilteredData(result)
+                                    setFilteredData(result);
                                 }}
                                 style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
                             />
