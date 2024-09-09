@@ -138,18 +138,34 @@ const SelectList: React.FC<SelectListProps> =  ({
                                 searchicon
                             }
                             
-                            <TextInput 
-                                placeholder={searchPlaceholder}
-                                onChangeText={(val) => {
-                                    let result =  data.filter((item: L1Keys) => {
+                          <TextInput
+                                    placeholder={searchPlaceholder}
+                                    onChangeText={(val: string) => {
                                         const normalizedVal = removeAccents(val.toLowerCase());
-                                        const normalizedRow = removeAccents(item.value.toLowerCase());
-                                        return normalizedRow.includes(normalizedVal);
-                                    });
-                                    setFilteredData(result)
-                                }}
-                                style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
-                            />
+                                
+                                        // Filtra os itens que começam com as letras digitadas
+                                        const startsWithResult = data
+                                            .filter((item: L1Keys) => {
+                                                const normalizedRow = removeAccents(item.value.toLowerCase());
+                                                return normalizedRow.startsWith(normalizedVal);
+                                            })
+                                            .sort((a: L1Keys, b: L1Keys) => a.value.localeCompare(b.value));
+                                
+                                        // Filtra os itens que contêm as letras digitadas (mas não começam com elas)
+                                        const containsResult = data
+                                            .filter((item: L1Keys) => {
+                                                const normalizedRow = removeAccents(item.value.toLowerCase());
+                                                return !normalizedRow.startsWith(normalizedVal) && normalizedRow.includes(normalizedVal);
+                                            })
+                                            .sort((a: L1Keys, b: L1Keys) => a.value.localeCompare(b.value));
+                                
+                                        // Junta as duas listas: primeiro os que começam, depois os que contêm
+                                        const result = [...startsWithResult, ...containsResult];
+                                
+                                        setFilteredData(result);
+                                    }}
+                                    style={[{padding:0,height:20,flex:1,fontFamily},inputStyles]}
+                                />
                                 <TouchableOpacity onPress={() => slideup()} >
 
                                 {
